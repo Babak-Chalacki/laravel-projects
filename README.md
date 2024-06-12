@@ -12,7 +12,7 @@ Features
 
 Installation
 
-Clone the repository: git clone https://github.com/your-username/laravel-e-commerce-website.git
+Clone the repository: git clone https://github.com/Babak-Chalacki/laravel-e-commerce-website.git
 Install dependencies: composer install
 Create a .env file and configure database and other settings
 Migrate the database: php artisan migrate
