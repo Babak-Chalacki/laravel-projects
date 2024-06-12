@@ -18,28 +18,25 @@ class ContactController extends Controller
 function add(Request $request){
 
 
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'HomeNumber' => 'required|numeric',
+    ]);
+
     $contact = new Contact();
     $contact->name = $request["name"];
     $contact->email = $request["email"];
-    // $contact->number = $request["number"];
     $contact->HomeNumber = $request["HomeNumber"];
     $contact->save();
 
-
-    $contacts = Contact::all();
-
-    return view('welcome',[
-        "contacts" => $contacts
-    ]);
+    return redirect()->route('home');
 }
-    function remove(){
-        Contact::truncate();
 
-        $contacts = Contact::all();
+function remove(){
+    Contact::truncate();
 
-        return view('welcome',[
-            "contacts" => $contacts
-        ]);
-    }
+    return redirect()->route('home');
+}
 
 }
