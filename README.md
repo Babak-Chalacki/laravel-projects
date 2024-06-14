@@ -127,5 +127,6 @@ Happy quizzing! 🎉
 
 <h3 align="center">add new</h3>
 
-![add new](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/result.png)
+![add new](https://github.com/Babak-Chalacki/laravel-projects/blob/a259de774f460b3bb3c86af4234e8d889c68d871/Quizzer/pic/new.png)
+
 
