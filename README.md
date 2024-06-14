@@ -61,7 +61,9 @@ Contributions to improve and enhance the Contact List Application are welcome. F
 This project is open-source under the MIT License, allowing for free usage, modification, and distribution of the application. Refer to the `LICENSE` file for more details.
 
 Thank you for using the Contact List Application!
+
 ---
+
 **project 3**
 
 
