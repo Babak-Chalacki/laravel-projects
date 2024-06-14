@@ -111,3 +111,21 @@ You can access the online quiz website at your cumputer.
 Feel free to contribute to this project by forking the repository and submitting a pull request. Any feedback or suggestions are welcome!
 
 Happy quizzing! 🎉
+
+
+<h3 align="center">start</h3>
+
+![strat page](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/start.png)
+
+<h3 align="center">question</h3>
+
+![questions pages](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/text.png)
+
+<h3 align="center">result</h3>
+
+![result pages](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/result.png)
+
+<h3 align="center">add new</h3>
+
+![add new](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/result.png)
+
