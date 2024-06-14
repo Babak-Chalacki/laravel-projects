@@ -81,6 +81,8 @@ This is an online quiz website created using Laravel. Users can participate in d
 - MySQL
 - HTML/CSS
 - Bootstrap
+- JavaScript 
+- jQuery 
 
 ## How to Run
 1. Clone the repository:
