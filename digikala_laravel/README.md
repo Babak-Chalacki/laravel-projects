@@ -14,7 +14,7 @@ Features
 
 Installation
 
-1. Clone the repository: git clone https://github.com/your-username/laravel-e-commerce-website.git
+1. Clone the repository: git clone https://github.com/Babak-Chalacki/laravel-e-commerce-website.git
 2. Install dependencies: composer install
 3. Create a .env file and configure database and other settings
 4. Migrate the database: php artisan migrate
