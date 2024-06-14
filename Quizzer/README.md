@@ -49,13 +49,17 @@ Happy quizzing! 🎉
 
 
 <center><h3>start</h3></center>
+
 ![strat page](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/start.png)
 
 <center><h3>questions</h3></center>
+
 ![questions pages](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/text.png)
 
 <center><h3>result</h3></center>
+
 ![result pages](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/result.png)
 
 <center><h3>add new</h3></center>
+
 ![add new](https://github.com/Babak-Chalacki/laravel-projects/blob/3b3e1eeb52b199f3fc2d06a9c10b0547e5ce5bdc/Quizzer/pic/result.png)
