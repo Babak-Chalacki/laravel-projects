@@ -10,8 +10,4 @@ class HomeController extends Controller
     {
         return view('index');
     }
-    function product()
-    {
-        return view('product');
-    }
 }

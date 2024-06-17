@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Star extends Model
 {
     use HasFactory;
+
+
+    public function user()
+    {
+        return $this->belongsTo(Star::class);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

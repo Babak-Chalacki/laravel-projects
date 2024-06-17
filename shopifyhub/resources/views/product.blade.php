@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@extends('template')
+@section('content')
+@section('title')
+shopify-hub product
+@endsection
     <title>shopify-hub Product</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
@@ -23,65 +22,57 @@
         .product-info {
             margin-bottom: 20px;
         }
-        .product-features {
+        /* .product-features {
             color: #fff;
             background-color: rgba(0, 0, 0, 0.2);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             margin-top:-23px;
-        }
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        .loading-spinner {
-            font-size: 3rem;
-            color: #333;
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        } */
+
     </style>
 </head>
 <body>
-    <div class="loading-overlay">
-        <div class="loading-spinner">
-            <i class="fas fa-spinner fa-spin"></i>
-        </div>
-        <h2>Loading...</h2>
-    </div>
+
+<!-- product.blade.php -->
+
+{{-- <h1>{{ $product->name }}</h1>
+
+<p>{{ $product->description }}</p>
+
+<h2>Product Images:</h2>
+
+<ul>
+    @foreach($product->images as $image)
+        <li><img src="{{ $image->url }}" alt="{{ $image->alt }}"></li>
+    @endforeach
+</ul> --}}
+
+
+    {{-- دیجی&zwnj;کالا --}}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center">Product Display Page</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="product-image">
-                    <img src="https://loremflickr.com/640/480/backpack" alt="Backpack Image" class="img-fluid">
+                    @foreach($product->images as $image)
+                    <img width="500px" src="{{ URL::to('/') }}/{{ $image->url }}"  class="img-fluid">
+                    @endforeach
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-info">
                     <h2 class="text-center">Product Information</h2>
                     <p>
-                        <strong>Product Name:</strong> Premium Leather Backpack
+                        <strong>Product Name:</strong> {{ $product->name }}
                         <br>
-                        <strong>Product Description:</strong> This high-quality leather backpack is perfect for everyday use. It features a spacious main compartment, a padded laptop sleeve, and multiple pockets for organization.
+                        <strong>Product Description:</strong> {{ $product->description }}
                         <br>
-                        <strong>Price:</strong> $99.99
+                        <strong>Price:</strong> ${{ $product->price }}
                         <br>
                         <strong>Rating:</strong> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> (4.2)
                     </p>
@@ -91,8 +82,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="product-features">
-                    <h2 class="text-center">Product Features</h2>
-                    <ul>
+                    <h2 hidden class="text-center">Product Features</h2>
+                    <ul hidden>
                         <li style="color: #fff;">Durable leather construction</li>
                         <li style="color: #fff;">Padded laptop sleeve fits up to 15-inch laptops</li>
                         <li style="color: #fff;">Multiple pockets for organization</li>
@@ -105,18 +96,18 @@
                 <h2 class="text-center">Add to Cart</h2>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">-</button>
+                        <button id="minus" class="btn btn-outline-secondary" type="button" id="button-addon1"><i class="fas fa-minus"></i></button>
                     </div>
-                    <input type="text" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon1" value="1">
+                    <input id="rangeInput" type="number"  min="1" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="button-addon1" value="1">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
+                        <button id="plus" class="btn btn-outline-secondary" type="button" id="button-addon2">   <i class="fas fa-plus"></i></button>
                     </div>
                 </div>
                 <button class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row mt-4 mt-5">
+            <div class="col-md-12 mt-5">
                 <h2 class="text-center">Related Products</h2>
                 <div class="row">
                     <div class="col-md-3">
@@ -163,14 +154,18 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-        setTimeout(function(){
-        // document.addEventListener("DOMContentLoaded", function() {
-            document.querySelector(".loading-overlay").style.display = "none";
-        // });
-    }, 1500);
+let intervalId;
+
+plus.addEventListener("mousedown", () => { rangeInput.value = parseInt(rangeInput.value) + 1;
+    intervalId = setInterval(() => { rangeInput.value = parseInt(rangeInput.value) + 1; }, 200); });
+
+minus.addEventListener("mousedown", () => { if (parseInt(rangeInput.value) > 1) {
+     rangeInput.value = parseInt(rangeInput.value) - 1;
+      intervalId = setInterval(() => { if (parseInt(rangeInput.value) > 1)
+         { rangeInput.value = parseInt(rangeInput.value) - 1; } }, 200); } });
+
+document.addEventListener("mouseup", () => { clearInterval(intervalId); });
+
     </script>
-</body>
-</html>
+@endsection
