@@ -59,6 +59,7 @@ shopify-hub product
         <div class="row">
             <div class="col-md-6">
                 <div class="product-image">
+                    {{-- @foreach($product->images as $image) --}}
                     @foreach($product->images as $image)
                     <img width="500px" src="{{ URL::to('/') }}/{{ $image->url }}"  class="img-fluid">
                     @endforeach
@@ -110,46 +111,26 @@ shopify-hub product
             <div class="col-md-12 mt-5">
                 <h2 class="text-center">Related Products</h2>
                 <div class="row">
+                    @forelse($productss as $products)
+                    @foreach ($products->images as $image)
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="https://loremflickr.com/640/480/bag" class="card-img-top" alt="Related Product 1">
+                            <img src="{{ URL::to('/') }}/{{ $image->url }}" class="card-img-top" alt="Related Product 1">
                             <div class="card-body">
-                                <h5 class="card-title">Leather Tote Bag</h5>
-                                <p class="card-text">$79.99</p>
-                                <a href="#" class="btn btn-primary">View Product</a>
+                                <h5 class="card-title">{{$products->name}}</h5>
+                                <p class="card-text">${{$products->price}}</p>
+                                <a href="/products/{{$products->id}}" class="btn btn-primary">View Product</a>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="https://loremflickr.com/640/480/bag" class="card-img-top" alt="Related Product 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Canvas Messenger Bag</h5>
-                                <p class="card-text">$59.99</p>
-                                <a href="#" class="btn btn-primary">View Product</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="https://loremflickr.com/640/480/bag" class="card-img-top" alt="Related Product 3">
-                            <div class="card-body">
-                                <h5 class="card-title">Leather Briefcase</h5>
-                                <p class="card-text">$149.99</p>
-                                <a href="#" class="btn btn-primary">View Product</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="https://loremflickr.com/640/480/bag" class="card-img-top" alt="Related Product 4">
-                            <div class="card-body">
-                                <h5 class="card-title">Backpack with USB Charging</h5>
-                                <p class="card-text">$89.99</p>
-                                <a href="#" class="btn btn-primary">View Product</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                @empty
+                    <p>No products found.</p>
+                @endforelse
+
+
+
                 </div>
             </div>
         </div>

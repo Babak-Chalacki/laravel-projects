@@ -77,8 +77,8 @@ shopify-hub
             <div class="row">
                 @forelse($products as $product)
                 @foreach($product->images as $image)
-                <div class="col-md-4 mt-5">
-                    <div class="card mt-5">
+                <div class="col-md-3 ">
+                    <div class="card mt-5 p-2">
                         <img src="{{ $image->url }}" alt="Product Image" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
