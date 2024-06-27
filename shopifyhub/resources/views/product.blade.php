@@ -5,6 +5,8 @@ shopify-hub product
 @endsection
     <title>shopify-hub Product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{url("css/comment.css")}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +63,7 @@ shopify-hub product
                 <div class="product-image">
                     {{-- @foreach($product->images as $image) --}}
                     @foreach($product->images as $image)
-                    <img width="500px" src="{{ URL::to('/') }}/{{ $image->url }}"  class="img-fluid">
+                    <img width="500px" src="{{ url("$image->url") }}"  class="img-fluid">
                     @endforeach
                 </div>
             </div>
@@ -107,7 +109,63 @@ shopify-hub product
                 <button class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
         </div>
+
+
+
         <div class="row mt-4 mt-5">
+        <div class="row mt-4 mt-5">
+        <div class="row mt-4 mt-5">
+        {{-- commnet   --}}
+        <div class="comment-section">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                     @auth
+                     <div class="card comment-card">
+                        <div class="card-body">
+                          <h4 class="card-title mb-4">add your Comment</h4>
+                          <form class="comment-form" method="post" action="{{ url("/add_comment/". Auth::user()->id) }}">
+                          {{-- <form class="comment-form"> --}}
+                            @csrf
+                            <input type="hidden" id="thisproduct_id" name="thisproduct_id" value="{{ $product->id }}">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
+                            </div>
+                            {{-- <button type="button" onclick="send_new({{$product->id}})" class="btn btn-primary">Submit</button> --}}
+                            <button type="submit"  class="btn btn-primary">Submit</button>
+                                      </form>
+
+                        </div>
+                      </div>
+
+
+                     @endauth
+
+                    @if ($comments->count() > 0)
+                    <div class="card comment-card mt-4">
+                        <div class="card-body">
+                          <h4 class="card-title mb-4">Comments</h4>
+
+                          @foreach ($comments as $comment)
+                          <div class=" p-4 comment-media {{ $loop->iteration % 2 == 0? 'bg-light' : 'bg-Muted ' }}">
+                            <div class="comment-media-body media-body">
+                              <h5 class="mt-0 mb-3">{{ $comment->user->name }}</h5>
+                              <h4>{{ $comment->text }}</h4>
+                              <div dir="rtl" class="comment-timestamp">
+                                <i class="fas fa-clock"></i>{{ $comment->created_at->format('j F Y') }}
+                              </div>
+                            </div>
+                          </div>
+                          @endforeach
+
+                        </div>
+                      </div>
+                    @endif
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{-- commnet   --}}
             <div class="col-md-12 mt-5">
                 <h2 class="text-center">Related Products</h2>
                 <div class="row">
@@ -115,7 +173,7 @@ shopify-hub product
                     @foreach ($products->images as $image)
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="{{ URL::to('/') }}/{{ $image->url }}" class="card-img-top" alt="Related Product 1">
+                            <img src="{{ url("$image->url") }}" class="card-img-top" alt="Related Product 1">
                             <div class="card-body">
                                 <h5 class="card-title">{{$products->name}}</h5>
                                 <p class="card-text">${{$products->price}}</p>
@@ -148,5 +206,45 @@ minus.addEventListener("mousedown", () => { if (parseInt(rangeInput.value) > 1) 
 
 document.addEventListener("mouseup", () => { clearInterval(intervalId); });
 
+</script>
+
+{{-- @auth
+<script>document.getElementById('comment-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    sendComment({{ Auth::user()->id }}, '{{ route('add-comment') }}');
+  });
+</script>
+@endauth --}}
+
+<script>
+
+// async function send_new(productId) {
+// //   let $ = document;
+// //   let wrapper = $.getElementById("wrapper" + productId);
+
+//   let form = document.getElementById("form" + productId);
+//   let thisproduct_id = $.getElementById("thisproduct_id" + productId).value;
+//   let comment = $.getElementById("comment" + productId).value;
+//   let data = new FormData();
+//   data.append('thisproduct_id', thisproduct_id);
+//   data.append('comment', comment);
+
+//   let csrfToken = $.querySelector('meta[name="csrf-token"]').content; // Get the CSRF token from the meta tag
+
+//   let response = await fetch('/add_comment'+ productId, {
+//     method: 'POST',
+//     headers: {
+//       'X-CSRF-TOKEN': csrfToken, // Use the CSRF token here
+//     },
+//     body: data
+//   });
+
+  // if (response.ok) {
+  //     alert('Data sent successfully!');
+  // } else {
+  //     alert('Error sending data.');
+  // }
+}
     </script>
+    {{-- <script src="{{url("js/ajax_comment.js")}}"></script> --}}
 @endsection

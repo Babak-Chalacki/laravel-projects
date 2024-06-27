@@ -6,7 +6,7 @@ shopify-hub
     <style>
          body {
         perspective: 1000px;
-        background-color: rgb(210, 206, 206)
+        /* background-color: rgb(210, 206, 206) */
     }
 
     .container {

@@ -30,6 +30,21 @@
         <textarea name="description"  class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $product->description }}</textarea>
       </div>
 
+      <center>
+        <div style="width:400px">
+            <div class="input-group">
+                <span class="input-group-btn">
+                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                    <i class="fa fa-picture-o"></i> Choose
+                  </a>
+                </span>
+                <input value="{{ url($product->images->first()->url) }}"  id="thumbnail" class="form-control" type="text" name="image">
+              </div>
+              <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+
+           </div>
+       </center>
+
     <div class="mb-3">
     <center>  <label for="exampleInputEmail1" class="form-label">Category</label>
         <select name="Category_id" id="">

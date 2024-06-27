@@ -63,6 +63,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
+                    @auth
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ url("/logout") }}">logout</a>
+                        </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="#">{{ Auth::user()->name }} <i class="fa fa-user"></i></a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url("/login") }}">login</a>
+                        </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{ url("/register") }}">register</a>
+                            </li>
+                        @endauth
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>

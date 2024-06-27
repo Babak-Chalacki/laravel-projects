@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -14,31 +15,22 @@ class ProductController extends Controller
     {
         return view('product');
     }
-    function add()
-    {
-    }
-    function edit()
-    {
-    }
-    function delete()
-    {
-    }
+
     public function get_all()
     {
-        // $products = Product::with('images')->get();
-        // $images = Image::with('product')->get();
-        // return view("index", compact('products', 'images'));
         $products = Product::all();
         return view("index", [
-            'products' => $products
+            'products' => $products,
+
         ]);
     }
     public function show_product($id)
     {
+        $comments = Comment::where('product_id', $id)->get();
+        $product = Product::with('images')->find($id);
         $productss = Product::all();
-        $products = Product::with('images')->find($id);
         return view('product', [
-            'product' => $products, "productss" => $productss
+            'product' => $product, "productss" => $productss, "comments" => $comments
         ]);
     }
 
@@ -69,6 +61,9 @@ class ProductController extends Controller
         $product->description =  $request["description"];
         $product->category_id =  $request["Category_id"];
         $product->save();
+        $image = new Image();
+        $image->url = $request->image;
+        $product->images()->save($image);
         return redirect('/admin/product');
     }
     function admin_get_prosuct($id)
