@@ -93,7 +93,12 @@ shopify-hub
                 @endforelse
 
 
-
+            </div>
+            <div class="row mt-5"></div>
+            <div class="row justify-content-center">
+               <div class="col" style="display: flex; justify-content:center;">
+                    {{ $products->onEachSide(1)->links() }}
+                </div>
             </div>
         </div>
     </section>

@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Star extends Model
 {
     use HasFactory;
 
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Star::class);
     }
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-    protected $fillable = ['text', 'user_id', 'product_id'];
 }

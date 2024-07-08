@@ -8,6 +8,7 @@ use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,5 +83,14 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 // file_manager need
 
 // user comment
-Route::post("/add_comment/{id}", [CommentController::class, "add_comment"]);
+Route::post("/add_comment", [CommentController::class, "add_comment"]);
 // Route::post('/add-comment', [CommentController::class, "add_comment"])->name('add-comment');// user comment
+
+Route::post("/send-rating", [ProductController::class, "add_rating"]);
+// Route::post('/comment', [CommentController::class, 'add_comment']);
+
+Route::post("/add_to_cart", [CartController::class, "add"]);
+
+Route::get("/carts", [CartController::class, "get"])->middleware("auth");
+Route::post("/update_cart_count", [CartController::class, "update_cart_count"])->middleware("auth");
+Route::post("/deleteProduct", [CartController::class, "deleteProduct"])->middleware("auth");

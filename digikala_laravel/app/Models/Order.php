@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Order extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Comment extends Model
     }
     public function product()
     {
+        // return $this->belongsToMany(Product::class)->withPivot('quantity');
         return $this->belongsTo(Product::class);
     }
-    protected $fillable = ['text', 'user_id', 'product_id'];
 }

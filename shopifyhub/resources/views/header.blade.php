@@ -82,15 +82,21 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Products
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Product categorization
+
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Electronics</a>
-                            <a class="dropdown-item" href="#">Fashion</a>
-                            <a class="dropdown-item" href="#">Home & Kitchen</a>
-                        </div>
+                        <ul class="dropdown-menu">
+                            @foreach ($categories as $category)
+                            <li><a class="dropdown-item" href="#">{{ $category->title }}</a></li>
+                            @endforeach
+                        </ul>
                     </li>
+                    @auth
+                        <li class="nav-item">
+                    <a class="nav-link" href="{{ url("/carts") }}"><i class="fas">&#xf07a;</i></a>
+                </li>
+                    @endauth
                 </ul>
             </div>
         </div>

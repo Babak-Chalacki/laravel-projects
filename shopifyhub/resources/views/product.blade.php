@@ -37,20 +37,6 @@ shopify-hub product
 </head>
 <body>
 
-<!-- product.blade.php -->
-
-{{-- <h1>{{ $product->name }}</h1>
-
-<p>{{ $product->description }}</p>
-
-<h2>Product Images:</h2>
-
-<ul>
-    @foreach($product->images as $image)
-        <li><img src="{{ $image->url }}" alt="{{ $image->alt }}"></li>
-    @endforeach
-</ul> --}}
-
 
     {{-- دیجی&zwnj;کالا --}}
     <div class="container">
@@ -77,7 +63,13 @@ shopify-hub product
                         <br>
                         <strong>Price:</strong> ${{ $product->price }}
                         <br>
-                        <strong>Rating:</strong> <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> (4.2)
+                        <strong>Rating:</strong>
+                        <small onclick="add(1)" onmouseover="show(1)" style="color:blue;" class="far  fa-star rating " onmouseout="out()"></small>
+                        <small onclick="add(2)"  onmouseover="show(2)" style="color:blue;" class="far fa-star rating " onmouseout="out()"></small>
+                        <small onclick="add(3)"  onmouseover="show(3)" style="color:blue;" class="far fa-star rating " onmouseout="out()"></small>
+                        <small onclick="add(4)"  onmouseover="show(4)" style="color:blue;" class="far fa-star rating " onmouseout="out()"></small>
+                        <small onclick="add(5)"  onmouseover="show(5)" style="color:blue;" class="far fa-star rating " onmouseout="out()"></small> <span id="span" class="rating-value"></span>
+
                     </p>
                 </div>
             </div>
@@ -87,11 +79,11 @@ shopify-hub product
                 <div class="product-features">
                     <h2 hidden class="text-center">Product Features</h2>
                     <ul hidden>
-                        <li style="color: #fff;">Durable leather construction</li>
-                        <li style="color: #fff;">Padded laptop sleeve fits up to 15-inch laptops</li>
-                        <li style="color: #fff;">Multiple pockets for organization</li>
-                        <li style="color: #fff;">Adjustable shoulder straps for comfort</li>
-                        <li style="color: #fff;">Water-resistant exterior</li>
+                        <li  style="color: #fff;">Durable leather construction</li>
+                        <li  style="color: #fff;">Padded laptop sleeve fits up to 15-inch laptops</li>
+                        <li  style="color: #fff;">Multiple pockets for organization</li>
+                        <li  style="color: #fff;">Adjustable shoulder straps for comfort</li>
+                        <li  style="color: #fff;">Water-resistant exterior</li>
                     </ul>
                 </div>
             </div>
@@ -106,8 +98,7 @@ shopify-hub product
                         <button id="plus" class="btn btn-outline-secondary" type="button" id="button-addon2">   <i class="fas fa-plus"></i></button>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-            </div>
+                <button onclick="add_to_cart({{ $product->id }},'{{ csrf_token() }}')" class="btn btn-primary btn-block"><i class="fas fa-shopping-cart"></i> Add to Cart</button>            </div>
         </div>
 
 
@@ -124,16 +115,16 @@ shopify-hub product
                      <div class="card comment-card">
                         <div class="card-body">
                           <h4 class="card-title mb-4">add your Comment</h4>
-                          <form class="comment-form" method="post" action="{{ url("/add_comment/". Auth::user()->id) }}">
-                          {{-- <form class="comment-form"> --}}
-                            @csrf
-                            <input type="hidden" id="thisproduct_id" name="thisproduct_id" value="{{ $product->id }}">
+                          {{-- <form class="comment-form" method="post" action="{{ url("/add_comment/". Auth::user()->id) }}"> --}}
+                            {{-- <input type="hidden" id="thisproduct_id" name="thisproduct_id" value="{{ $product->id }}"> --}}
+                          <form id="comment-form" class="comment-form">
+
                             <div class="form-group">
-                                <textarea class="form-control" rows="3" id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
+                                <textarea class="form-control" rows="3" id="ajaxText" name="text" placeholder="Write your comment here..." required></textarea>
                             </div>
-                            {{-- <button type="button" onclick="send_new({{$product->id}})" class="btn btn-primary">Submit</button> --}}
-                            <button type="submit"  class="btn btn-primary">Submit</button>
-                                      </form>
+                            <button type="button" onclick="send_new()" class="btn btn-primary">Submit</button>
+                        </form>
+                        {{-- <button type="submit"  class="btn btn-primary">Submit</button> --}}
 
                         </div>
                       </div>
@@ -206,45 +197,110 @@ minus.addEventListener("mousedown", () => { if (parseInt(rangeInput.value) > 1) 
 
 document.addEventListener("mouseup", () => { clearInterval(intervalId); });
 
-</script>
 
-{{-- @auth
-<script>document.getElementById('comment-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    sendComment({{ Auth::user()->id }}, '{{ route('add-comment') }}');
-  });
-</script>
-@endauth --}}
 
+
+let ratingValue = 4.2; // initial rating value
+let ratingCount = 5; // total number of ratings
+let span = document.getElementById("span")
+function show(rating) {
+  let ratings = document.querySelectorAll(".rating"); // get all elements with class "rating"
+  for (let i = 0; i < ratings.length; i++) {
+    if (i < rating) {
+      ratings[i].classList.add("fas"); // add fas class to elements up to the rating value
+      span.innerHTML = `(${rating})`
+    } else {
+      ratings[i].classList.remove("fas"); // remove fas class from elements above the rating value
+    }
+  }
+}
+const ratingContainer = document.querySelector(".rating-container"); // assume a parent element with this class
+
+ratingContainer.addEventListener("click", function(event) {
+    if (event.target.classList.contains("rating")) {
+        event.target.classList.add("fas");
+
+    }
+});
+
+ratingContainer.addEventListener("mouseout", function(event) {
+    if (event.target.classList.contains("rating")) {
+        event.target.classList.remove("fas");
+    }
+});
+
+function add(x) {
+  let json_data = {
+    product_id: {{ $product->id }},
+    score: x
+  };
+
+  fetch('/send-rating', {
+    method: "POST",
+    body: JSON.stringify(json_data), // convert json_data to JSON string
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-Token": '{{ csrf_token() }}'
+    },
+  }).then(result => result.text()).then(result => {
+    // alert("Your rating saved successfully")
+    alert(result)
+  })
+}
+</script>
 <script>
 
-// async function send_new(productId) {
-// //   let $ = document;
-// //   let wrapper = $.getElementById("wrapper" + productId);
+function send_new() {
+    const formData = new FormData(document.getElementById('comment-form'));
+    const url = '/add_comment'; // Replace with your Laravel route
 
-//   let form = document.getElementById("form" + productId);
-//   let thisproduct_id = $.getElementById("thisproduct_id" + productId).value;
-//   let comment = $.getElementById("comment" + productId).value;
-//   let data = new FormData();
-//   data.append('thisproduct_id', thisproduct_id);
-//   data.append('comment', comment);
-
-//   let csrfToken = $.querySelector('meta[name="csrf-token"]').content; // Get the CSRF token from the meta tag
-
-//   let response = await fetch('/add_comment'+ productId, {
-//     method: 'POST',
-//     headers: {
-//       'X-CSRF-TOKEN': csrfToken, // Use the CSRF token here
-//     },
-//     body: data
-//   });
-
-  // if (response.ok) {
-  //     alert('Data sent successfully!');
-  // } else {
-  //     alert('Error sending data.');
-  // }
+    fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Laravel CSRF token
+        }
+    })
+   .then(result => result.text())
+   .then(result =>{
+    // alert("your comment save successfuly")
+    alert(result)
+   })
 }
-    </script>
+
+    // async function send_new() {
+    //     let json_data = {
+    //         product_id: 123, // شناسه محصول را قرار دهید
+    //         text: document.getElementById('ajaxText').value
+    //     };
+
+    //     try {
+    //         const response = await fetch('/add_comment', {
+    //             method: 'POST',
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Accept": "application/json",
+    //                 "X-Requested-With": "XMLHttpRequest",
+    //                 "X-CSRF-Token": "your_csrf_token_here" // توکن CSRF خود را وارد کنید
+    //             },
+    //             body: JSON.stringify(json_data)
+    //         });
+
+    //         const result = await response.text();
+    //         console.log(result);
+    //         alert(result);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
+
+
+
+</script>
+
     {{-- <script src="{{url("js/ajax_comment.js")}}"></script> --}}
+    <script src="{{url("js/ajax_add_to_cart.js")}}"></script>
 @endsection
