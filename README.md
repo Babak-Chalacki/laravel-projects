@@ -170,3 +170,26 @@ ShopifyHub offers a range of features to enhance the online shopping experience 
 ## Contributing
 
 We welcome contributions to ShopifyHub! Feel free to fork the repository, make your changes, and submit a pull request for review. Together, we can make this project even better.
+
+
+   ---
+
+
+  <h3 align="center">Client</h3>
+  
+  ![main page](https://github.com/Babak-Chalacki/laravel-projects/blob/b725c2a55c58c37178de918277a018828877e17b/shopifyhub/screen/main.png)
+
+   ![products page](https://github.com/Babak-Chalacki/laravel-projects/blob/bde977d348af8d56398465f192fb3dfc13d07669/shopifyhub/screen/product.png)
+
+   ![user basket page](https://github.com/Babak-Chalacki/laravel-projects/blob/38d25b68929f99bb536edf9867b3c22a85137dd9/shopifyhub/screen/user_basket.png)
+
+
+   ![user profile](https://github.com/Babak-Chalacki/laravel-projects/blob/38d25b68929f99bb536edf9867b3c22a85137dd9/shopifyhub/screen/profile.png)
+
+  <h3 align="center">Panel Admin</h3>
+
+  ![dashboard](https://github.com/Babak-Chalacki/laravel-projects/blob/38d25b68929f99bb536edf9867b3c22a85137dd9/shopifyhub/screen/dashboard.png)
+
+  ![product-managing](https://github.com/Babak-Chalacki/laravel-projects/blob/38d25b68929f99bb536edf9867b3c22a85137dd9/shopifyhub/screen/product_managing.png)
+
+![comment managing](https://github.com/Babak-Chalacki/laravel-projects/blob/38d25b68929f99bb536edf9867b3c22a85137dd9/shopifyhub/screen/comment.png)
