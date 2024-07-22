@@ -29,3 +29,11 @@ ShopifyHub offers a range of features to enhance the online shopping experience 
 
 We welcome contributions to ShopifyHub! Feel free to fork the repository, make your changes, and submit a pull request for review. Together, we can make this project even better.
 
+
+
+   ---
+
+
+  <h3 align="cenetr">Client</h3>
+  
+  ![main page](shopifyhub/screen/main.png)
