@@ -67,14 +67,14 @@ class UserController extends Controller
 
     function register_post(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'username' => 'required|unique|max:12',
-        //     'password' => 'required|min:8',
-        //     'city_id' => 'required',
-        //     'phone' => 'required',
-        // ]);
+         $this->validate($request, [
+             'name' => 'required',
+             'email' => 'required|email|unique:users',
+             'username' => 'required|unique|max:12',
+             'password' => 'required|min:8',
+             'city_id' => 'required',
+             'phone' => 'required',
+         ]);
         $new_user = new User();
         $new_user->name = $request->name;
         $new_user->username = $request->username;
